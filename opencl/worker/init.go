@@ -1,5 +1,6 @@
 package worker
 
+/*
 import (
 	"fmt"
 	"github.com/xfong/go2opencl/cl"
@@ -112,3 +113,5 @@ func WriteClFiles(tardir string, files map[string]string) error {
 	// 成功
 	return nil
 }
+
+*/

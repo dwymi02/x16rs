@@ -1,5 +1,6 @@
 package worker
 
+/*
 import (
 	"bytes"
 	"encoding/binary"
@@ -75,3 +76,4 @@ func (mr *GpuMiner) doGroupWork(ctx *GpuMinerDeviceWorkerContext, global int, lo
 	return false, nil, nil
 
 }
+*/

@@ -1,5 +1,6 @@
 package worker
 
+/*
 import (
 	"fmt"
 	"github.com/xfong/go2opencl/cl"
@@ -113,3 +114,4 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 	// 返回
 	return program
 }
+*/

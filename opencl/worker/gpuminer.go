@@ -1,5 +1,6 @@
 package worker
 
+/*
 import "github.com/xfong/go2opencl/cl"
 
 // GPU挖矿统筹
@@ -49,3 +50,4 @@ func NewGpuMiner(
 	// 创建成功
 	return miner
 }
+*/

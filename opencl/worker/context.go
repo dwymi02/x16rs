@@ -1,5 +1,6 @@
 package worker
 
+/*
 import (
 	"github.com/xfong/go2opencl/cl"
 )
@@ -84,3 +85,4 @@ func (mr *GpuMiner) createWorkContext(devidx int) *GpuMinerDeviceWorkerContext {
 	return ctx
 
 }
+*/

@@ -1,5 +1,6 @@
 package worker
 
+/*
 import (
 	"bytes"
 	"encoding/hex"
@@ -107,3 +108,4 @@ func (g *GpuMiner) DoMining(blockHeight uint64, reporthashrate bool, stopmark *b
 	return successed, successStuffIdx, successNonce, successHash
 
 }
+*/
