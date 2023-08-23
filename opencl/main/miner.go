@@ -186,7 +186,6 @@ func (mr *GpuMiner) createWorkContext(queue_index int) *WorkContext {
 
 ////////////////////////////////////////////
 
-//
 func (mr *GpuMiner) ReStartMiner(blockHeight uint32, blkstuff [89]byte, target [32]byte,
 	blockCoinbaseMsg [16]byte, blockCoinbaseAddr [21]byte,
 ) *minerDeviceExecute {
@@ -510,7 +509,7 @@ func (mr *GpuMiner) InitBuildProgram(openclPath string, platName string, dvid in
 	}
 
 	fmt.Println("create building opencl program from dir " + mr.openclPath + ", please wait...")
-	//bderr := mr.program.BuildProgram(nil, "-I "+mr.openclPath) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+	//bderr := mr.program.BuildProgram(nil, "-I "+mr.openclPath) // -I ./github.com/hacash/x16rs/opencl
 	//if bderr != nil {
 	//	panic(bderr)
 	//}
@@ -540,7 +539,7 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 	binstat, staterr := os.Stat(binfilepath)
 	if mr.rebuild || staterr != nil {
 		program, _ = mr.context.CreateProgramWithSource([]string{` #include "x16rs_main.cl" `})
-		bderr := program.BuildProgram(nil, "-I "+mr.openclPath) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+		bderr := program.BuildProgram(nil, "-I "+mr.openclPath) // -I ./github.com/hacash/x16rs/opencl
 		if bderr != nil {
 			panic(bderr)
 		}

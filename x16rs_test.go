@@ -232,7 +232,7 @@ func Test_OpenCL(t *testing.T) {
 	context, _ := cl.CreateContext([]*cl.Device{device})
 	queue, _ := context.CreateCommandQueue(device, 0)
 	program, _ := context.CreateProgramWithSource([]string{string(kernelSource)})
-	program.BuildProgram(nil, "-I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl") // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+	program.BuildProgram(nil, "-I ./github.com/hacash/x16rs/opencl") // -I ./github.com/hacash/x16rs/opencl
 	kernel, _ := program.CreateKernel("hash_sha3")
 
 	// input and output

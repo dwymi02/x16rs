@@ -17,7 +17,7 @@ func test() {
 	//item_wide := flag.Int("iw", 64, "Number of concurrent processing at a time")
 	//flag.Parse()
 
-	BuildProgram("/media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl", "", 0, false, "miner_do_hash_x16rs_v1")
+	BuildProgram("./github.com/hacash/x16rs/opencl", "", 0, false, "miner_do_hash_x16rs_v1")
 
 }
 
@@ -66,7 +66,7 @@ func BuildProgram(cldir string, plat string, dvid int, rebuild bool, kernelname 
 	program, _ := context.CreateProgramWithSource([]string{` #include "x16rs_main.cl" `})
 
 	fmt.Println("building opencl program from dir " + cldir + ", please wait...")
-	bderr := program.BuildProgram(nil, "-I "+cldir) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+	bderr := program.BuildProgram(nil, "-I "+cldir) // -I ./github.com/hacash/x16rs/opencl
 	if bderr != nil {
 		panic(bderr)
 	}
@@ -77,7 +77,7 @@ func BuildProgram(cldir string, plat string, dvid int, rebuild bool, kernelname 
 		binfilepath := cldir + "/" + binfilename + ".objcache"
 		binstat, staterr := os.Stat(binfilepath)
 		if rebuild || staterr != nil {
-			bderr := program.BuildProgram(nil, "-I " + cldir) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+			bderr := program.BuildProgram(nil, "-I " + cldir) // -I ./github.com/hacash/x16rs/opencl
 			if bderr != nil {
 				panic(bderr)
 			}

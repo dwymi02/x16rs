@@ -38,7 +38,7 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 		codeString := ` #include "x16rs_main` + emptyFuncTest + `.cl" `
 		codeString += fmt.Sprintf("\n#define updateforbuild %d", rand.Uint64()) // 避免某些平台编译缓存
 		program, _ = mr.context.CreateProgramWithSource([]string{codeString})
-		bderr := program.BuildProgram(mr.devices, "-I "+mr.openclPath) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+		bderr := program.BuildProgram(mr.devices, "-I "+mr.openclPath) // -I ./github.com/hacash/x16rs/opencl
 		if bderr != nil {
 			panic(bderr)
 		}

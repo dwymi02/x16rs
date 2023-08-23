@@ -62,7 +62,7 @@ func check_step_pre_hash(input_stuff_89 []byte) []byte {
 
 	//input_hash, _ := hex.DecodeString("4906f613be6708dca0ed8222368acc477036919485059c01a0735092474fe485")
 
-	device, _, kernel, context := buildOrLoadProgram("/media/yangjie/500GB/hacash/go/src/github.com/hacash/x16rs/opencl", 0, 0, false, "check_x16rs_prehash")
+	device, _, kernel, context := buildOrLoadProgram("./github.com/hacash/x16rs/opencl", 0, 0, false, "check_x16rs_prehash")
 
 	queue, _ := context.CreateCommandQueue(device, 0)
 
@@ -102,7 +102,7 @@ func check_step_by_input_hash(x16rsrepeat int, input_hash []byte) []byte {
 
 	//input_hash, _ := hex.DecodeString("4906f613be6708dca0ed8222368acc477036919485059c01a0735092474fe485")
 
-	device, _, kernel, context := buildOrLoadProgram("/media/yangjie/500GB/hacash/go/src/github.com/hacash/x16rs/opencl", 0, 0, false, "check_x16rs_step")
+	device, _, kernel, context := buildOrLoadProgram("./github.com/hacash/x16rs/opencl", 0, 0, false, "check_x16rs_step")
 
 	queue, _ := context.CreateCommandQueue(device, 0)
 
@@ -191,7 +191,7 @@ func buildOrLoadProgram(cldir string, platform_id int, device_id int, rebuild bo
 			}
 		}()
 		program, _ = context.CreateProgramWithSource([]string{` #include "x16rs_main.cl" `})
-		bderr := program.BuildProgram(nil, "-I "+cldir) // -I /media/yangjie/500GB/Hacash/src/github.com/hacash/x16rs/opencl
+		bderr := program.BuildProgram(nil, "-I "+cldir) // -I ./github.com/hacash/x16rs/opencl
 		if bderr != nil {
 			panic(bderr)
 		}
