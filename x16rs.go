@@ -124,9 +124,10 @@ func DiamondHash(reshash []byte) string {
 
 func HashRepeatForDiamondNumber(diamondNumber uint32) int {
 	repeat := int(diamondNumber/8192 + 1) // Adjust the hashing times every 8192 diamonds (about 140 days and half a year)
-	if repeat > 16 {
+	// drop the 16 max limit
+	/* if repeat > 16 {
 		repeat = 16 // atmost 16 round due to x16rs algorithm
-	}
+	}*/
 	return repeat
 }
 
@@ -313,7 +314,7 @@ func TestPrintX16RS(stuff32 []byte) [][]byte {
 	return resbytes
 }
 
-////////////////////////  GPU OpenCL  ////////////////////////////
+// //////////////////////  GPU OpenCL  ////////////////////////////
 func OpenCLMinerNonceHashX16RS(stopmark *byte, tarhashvalue []byte, blockheadmeta []byte) []byte {
 	return nil
 }
