@@ -104,6 +104,21 @@ func MinerNonceHashX16RS(blockHeight uint64, retmaxhash bool, stopmark *byte, ha
 	return byte(stopkind[0]), success[0] == 1, []byte(C.GoStringN(&nonce[0], 4)), []byte(C.GoStringN(&reshash[0], 32))
 }
 
+func DoMiningX16rsV1(blockHeight uint64, hashstart uint32, hashend uint32, blockheadmeta []byte) ([]byte, []byte) {
+	repeat := HashRepeatForBlockHeight(blockHeight)
+
+	var nonce [4]C.char
+	var reshash [32]C.char
+	var hsstart = C.uint32_t(hashstart) // uint32(1)
+	var hsend = C.uint32_t(hashend)     // uint32(4294967294)
+	var stuff = C.CString(string(blockheadmeta))
+	defer C.free(unsafe.Pointer(stuff))
+
+	C.x16rs_block_miner_v1(C.int(repeat), hsstart, hsend, stuff, &nonce[0], &reshash[0])
+
+	return []byte(C.GoStringN(&nonce[0], 4)), []byte(C.GoStringN(&reshash[0], 32))
+}
+
 var diamond_hash_base_stuff = []byte("0WTYUIAHXVMEKBSZN")
 
 func DiamondHash(reshash []byte) string {

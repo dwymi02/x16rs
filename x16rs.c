@@ -983,3 +983,64 @@ void test_print_x16rs(const char* input, char* output32x16)
     in = (void*) hash;
     memcpy(output32x16 + 32*15, (void*)hash, 32);
 }
+
+
+// algorithm to mining hac
+void x16rs_block_miner_v1(const int loopnum, const uint32_t hsstart, const uint32_t hsend, const char* input_stuff89, char* nonce4, char* reshash32)
+{
+    //
+    uint8_t stuffnew_base[90];
+    uint8_t *stuffnew = stuffnew_base + 1; // 89
+    memcpy(stuffnew, input_stuff89, 89);
+    uint32_t *stuffnew_uint32 = (uint32_t*)stuffnew_base;
+
+    // value for sha3 result
+    unsigned char sha3res[32];
+
+    // value for x16rs hash
+    uint8_t hashnew[32];
+    uint8_t hashmaxpower[32];
+    hashmaxpower[0] = 255; // init
+    uint8_t noncemaxpower[4];
+
+    // Judge whether the hash meets the requirements
+    uint8_t ismorepower = 0;
+
+    // Check the for loop value of the result
+    uint8_t pk = 0;
+    uint8_t pi = 0;
+
+
+    // nonce value
+    uint32_t noncenum;
+    for (noncenum = hsstart; noncenum < hsend; noncenum++) {
+        // reset nonce value
+        stuffnew_uint32[20] = noncenum; // nonce set
+        sha3_256(stuffnew, 89, sha3res);
+        x16rs_hash(loopnum, ((void*)sha3res), ((void*)hashnew));
+
+        ismorepower = 0;
+        for (pk = 0; pk < 32; pk++) {
+            uint8_t o1 = hashmaxpower[pk];
+            uint8_t o2 = hashnew[pk];
+            if (o2 > o1) {
+                break;
+            }
+            if (o2 < o1) {
+                ismorepower = 1;
+                break;
+            }
+        }
+        if (ismorepower == 1) {
+            memcpy(&noncemaxpower, &noncenum, 4);
+            memcpy(&hashmaxpower, &hashnew, 32);
+        }
+        // continue doing next excavation
+    }
+
+    // mining cycle end, return max hash result
+    memcpy(nonce4, &noncemaxpower, 4);
+    memcpy(reshash32, &hashmaxpower, 32);
+    return;
+
+}
