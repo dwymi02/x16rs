@@ -593,9 +593,9 @@ void diamond_hash(const char* hash32, char* output16)
 void miner_diamond_hash(const uint32_t hsstart, const uint32_t hsend, const int diamondnumber, const char* stop_mark1, const char* input32, const char* addr21, const char* extmsg32, char* nonce8, char* diamond16)
 {
     int loopnum = diamondnumber / 8192 + 1; // Adjust the hashing times every 8192 diamonds (about 140 days and half a year)
-    if( loopnum > 16 ){
+    /*if( loopnum > 16 ){
         loopnum = 16; // atmost 16 rounds for x16rs algorithm
-    }
+    }*/ // drop max 16
 
     // mark for stop running or not
     uint8_t *is_stop = (uint8_t*)stop_mark1;
