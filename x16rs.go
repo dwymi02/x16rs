@@ -274,7 +274,7 @@ func CheckDiamondDifficulty(dNumber uint32, sha3hash, dBytes []byte) bool {
 	}
 
 	// Every 3277 diamonds is about 56 days. Adjust the difficulty 3277 = 16 ^ 6 / 256 / 20
-	// When the difficulty is the highest, the first 20 bits of the hash are 0, not all 32 bits are 0.
+	// When the difficulty is the highest, the first 20 bytes of the hash are 0, not all 32 bytes are 0.
 	diffnum := dNumber / 3277
 	for _, bt := range dBytes {
 		if diffnum < 255 {
