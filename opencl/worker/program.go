@@ -22,7 +22,7 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 	if mr.rebuild || staterr != nil {
 		fmt.Print("Create opencl program with source: " + mr.openclPath + ", Please wait...")
 		buildok := false
-		go func() { // 打印
+		go func() { //
 			for {
 				time.Sleep(time.Second * 3)
 				if buildok {
@@ -33,16 +33,16 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 		}()
 		emptyFuncTest := ""
 		if mr.emptyFuncTest {
-			emptyFuncTest = `_empty_test` // 空函数快速编译测试
+			emptyFuncTest = `_empty_test` // test
 		}
 		codeString := ` #include "x16rs_main` + emptyFuncTest + `.cl" `
-		codeString += fmt.Sprintf("\n#define updateforbuild %d", rand.Uint64()) // 避免某些平台编译缓存
+		codeString += fmt.Sprintf("\n#define updateforbuild %d", rand.Uint64())
 		program, _ = mr.context.CreateProgramWithSource([]string{codeString})
 		bderr := program.BuildProgram(mr.devices, "-I "+mr.openclPath) // -I ./github.com/hacash/x16rs/opencl
 		if bderr != nil {
 			panic(bderr)
 		}
-		buildok = true // build 完成
+		buildok = true // build
 		fmt.Println("\nBuild complete get binaries...")
 		//fmt.Println("program.GetBinarySizes()")
 		// size := len(mr.devices)
@@ -111,7 +111,7 @@ func (mr *GpuMiner) buildOrLoadProgram() *cl.Program {
 	}
 	fmt.Println("GPU miner program create complete successfully.")
 
-	// 返回
+	// ok
 	return program
 }
 */

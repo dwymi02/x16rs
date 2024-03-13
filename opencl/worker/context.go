@@ -5,7 +5,6 @@ import (
 	"github.com/xfong/go2opencl/cl"
 )
 
-// 单个设备执行环境
 type GpuMinerDeviceWorkerContext struct {
 	context      *cl.Context
 	device       *cl.Device
@@ -35,7 +34,7 @@ func (w *GpuMinerDeviceWorkerContext) ReInit(stuff_buf []byte, target_buf []byte
 // chua
 func (mr *GpuMiner) createWorkContext(devidx int) *GpuMinerDeviceWorkerContext {
 
-	// 运行创建执行单元
+	//
 	//input_target_buf := make([]byte, 32)
 	//copy(input_target_buf, work.target[:])
 	//input_stuff_buf := make([]byte, 89)
@@ -46,7 +45,6 @@ func (mr *GpuMiner) createWorkContext(devidx int) *GpuMinerDeviceWorkerContext {
 	//defer input_target.Release()
 	//defer input_stuff.Release()
 
-	// 参数
 	// |cl.MemAllocHostPtr
 	output_nonce, _ := mr.context.CreateEmptyBuffer(cl.MemReadWrite|cl.MemAllocHostPtr, 4)
 	output_hash, _ := mr.context.CreateEmptyBuffer(cl.MemReadWrite|cl.MemAllocHostPtr, 32)
@@ -78,10 +76,10 @@ func (mr *GpuMiner) createWorkContext(devidx int) *GpuMinerDeviceWorkerContext {
 		output_hash,
 	}
 
-	// 复用
+	//
 	ctx.Retain()
 
-	// 返回
+	//
 	return ctx
 
 }

@@ -17,11 +17,11 @@ func (mr *GpuMiner) Init() error {
 		tardir := GetCurrentDirectory() + "/opencl/"
 		if _, err := os.Stat(tardir); err != nil {
 			fmt.Println("Create opencl dir and render files...")
-			files := GetRenderCreateAllOpenclFiles() // 输出所有文件
+			files := GetRenderCreateAllOpenclFiles()
 			err := WriteClFiles(tardir, files)
 			if err != nil {
 				fmt.Println(e)
-				os.Exit(0) // 致命错误
+				os.Exit(0)
 			}
 			fmt.Println("all file ok.")
 		} else {
@@ -61,10 +61,9 @@ func (mr *GpuMiner) Init() error {
 		fmt.Printf("  - device %d: %s, (max_work_group_size: %d)\n", i, dv.Name(), dv.MaxWorkGroupSize())
 	}
 
-	// 是否单设备编译
 	if mr.useOneDeviceBuild {
 		fmt.Println("Only use single device to build and run.")
-		mr.devices = []*cl.Device{devices[0]} // 使用单台设备
+		mr.devices = []*cl.Device{devices[0]}
 	} else {
 		mr.devices = devices
 	}
@@ -73,21 +72,20 @@ func (mr *GpuMiner) Init() error {
 		return e
 	}
 
-	// 编译源码
 	mr.program = mr.buildOrLoadProgram()
 
-	// 初始化执行环境
+
 	devlen := len(mr.devices)
 	mr.deviceworkers = make([]*GpuMinerDeviceWorkerContext, devlen)
 	for i := 0; i < devlen; i++ {
 		mr.deviceworkers[i] = mr.createWorkContext(i)
 	}
 
-	// 初始化成功
+
 	return nil
 }
 
-// 写入 opencl 文件
+
 func WriteClFiles(tardir string, files map[string]string) error {
 
 	e := os.MkdirAll(tardir, os.ModePerm)
@@ -110,7 +108,7 @@ func WriteClFiles(tardir string, files map[string]string) error {
 			return e
 		}
 	}
-	// 成功
+
 	return nil
 }
 

@@ -7,14 +7,14 @@ import (
 	"fmt"
 )
 
-// 启动分组
+//
 func (mr *GpuMiner) doGroupWork(ctx *GpuMinerDeviceWorkerContext, global int, local int, x16rsrepeat uint32, base_start uint32) (bool, []byte, []byte) {
 
 	// time.Sleep(time.Millisecond * 300)
 
 	var e error
 
-	// 重置
+	//
 	_, e = ctx.queue.EnqueueWriteBufferByte(ctx.output_nonce, true, 0, []byte{0, 0, 0, 0}, nil)
 	if e != nil {
 		panic(e)
